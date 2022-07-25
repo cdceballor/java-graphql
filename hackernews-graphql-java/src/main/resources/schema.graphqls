@@ -4,7 +4,6 @@ type Link {
   description: String!
 }
 
-# Login an authentication
 type User{
     id:ID!
     name: String!
@@ -12,19 +11,28 @@ type User{
     password: String
 }
 
+type SignInPayload{
+  token: String
+  user: User
+}
+
 input Data{
     email: String!
     password: String!
 }
 
+# Login an authentication
+
 # ----------------------------------------------------------------
 
 type Query {
   allLinks: [Link]
+  allUsers: [User]
 }
 
 type Mutation{
     createLink(url:String!, description:String!):Link
+    signInUser(auth: Data): SignInPayload
     createUser(name:String!, authProvider: Data):User
 }
 

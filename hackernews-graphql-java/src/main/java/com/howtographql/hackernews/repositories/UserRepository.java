@@ -1,10 +1,14 @@
-package com.howtographql.hackernews;
+package com.howtographql.hackernews.repositories;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import java.util.List;
+
+import com.howtographql.hackernews.models.User;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.bson.types.ObjectId;
+import java.util.ArrayList;
 
 public class UserRepository {
 
@@ -31,11 +35,18 @@ public class UserRepository {
     doc.append("password", user.getPassword());
     users.insertOne(doc);
     return new User(
-      doc.get("_id").toString(),
-      user.getName(),
-      user.getEmail(),
-      user.getPassword()
-    );
+        doc.get("_id").toString(),
+        user.getName(),
+        user.getEmail(),
+        user.getPassword());
+  }
+
+  public List<User> getAllUsers() {
+    List<User> allUsers = new ArrayList<>();
+    for (Document doc : users.find()) {
+      allUsers.add(user(doc));
+    }
+    return allUsers;
   }
 
   private User user(Document doc) {
