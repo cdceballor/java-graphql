@@ -1,7 +1,4 @@
-package com.graphqljava.tutorial.bookDetails;
-
-import java.util.Arrays;
-import java.util.List;
+package com.graphqljava.tutorial.bookDetails.models;
 
 public class Book{
     private String id;
@@ -16,15 +13,6 @@ public class Book{
         this.authorId = authorId;
     }
 
-    private static List<Book> books = Arrays.asList(
-        new Book("book-1", "Harry Potter and the Philosopher's Stone", 223, "author-1"),
-            new Book("book-2", "Moby Dick", 635, "author-2"),
-            new Book("book-3", "Interview with the vampire", 371, "author-3")
-    );
-
-    public static Book getById(String id) {
-        return books.stream().filter(book -> book.getId().equals(id)).findFirst().orElse(null);
-    }
     public String getId() {
         return this.id;
     }
@@ -39,5 +27,10 @@ public class Book{
 
     public String getAuthorId() {
         return this.authorId;
+    }
+
+    @Override
+    public String toString() {
+        return "Book [ id: " + getId()+ ", name "+ getName() + " pageCount: " + getPageCount() + " authorId: " + getAuthorId() + "]";
     }
 }
