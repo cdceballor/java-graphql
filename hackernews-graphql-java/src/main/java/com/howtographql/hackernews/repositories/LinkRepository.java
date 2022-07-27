@@ -3,11 +3,18 @@ package com.howtographql.hackernews.repositories;
 import static com.mongodb.client.model.Filters.eq;
 
 import com.howtographql.hackernews.models.Link;
+import com.howtographql.hackernews.models.LinkFilter;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
+import static com.mongodb.client.model.Filters.regex;
+import static com.mongodb.client.model.Filters.and;
 
 public class LinkRepository {
 
@@ -23,7 +30,7 @@ public class LinkRepository {
   }
 
   public Link findById(String id) {
-    Document doc = links.find(eq("_id", new ObjectId(id))).first();
+    Document doc = links.find(eq("id", new ObjectId(id))).first();
     return link(doc);
   }
 
@@ -44,9 +51,48 @@ public class LinkRepository {
 
   private Link link(Document doc) {
     return new Link(
-      doc.get("_id").toString(),
-      doc.getString("url"),
-      doc.getString("description")
-    );
+        doc.get("_id").toString(),
+        doc.getString("url"),
+        doc.getString("description"));
+  }
+
+  // Creating the filter implementation to the different links
+  public List<Link> getAllLinksFilter(LinkFilter filter) {
+    Optional<Bson> mongoFilter = Optional.ofNullable(filter).map(this::buildFilter);
+
+    List<Link> allLinks = new ArrayList<>();
+    for (Document doc : mongoFilter.map(links::find).orElseGet(links::find)) {
+      allLinks.add(link(doc));
+    }
+    return allLinks;
+  }
+
+  public List<Link> getAllLinksFilterPagination(LinkFilter filter, int skip, int limit) {
+    Optional<Bson> mongoFilter = Optional.ofNullable(filter).map(this::buildFilter);
+
+    List<Link> allLinks = new ArrayList<>();
+    FindIterable<Document> documents = mongoFilter.map(links::find).orElseGet(links::find);
+    for (Document doc : documents.skip(skip).limit(limit)) {
+      allLinks.add(link(doc));
+    }
+    return allLinks;
+  }
+
+  // builds a Bson from a LinkFilter
+  private Bson buildFilter(LinkFilter filter) {
+    String descriptionPattern = filter.getDescriptionContains();
+    String urlPattern = filter.getUrlContains();
+    Bson descriptionCondition = null;
+    Bson urlCondition = null;
+    if (descriptionPattern != null && !descriptionPattern.isEmpty()) {
+      descriptionCondition = regex("description", ".*" + descriptionPattern + ".*", "i");
+    }
+    if (urlPattern != null && !urlPattern.isEmpty()) {
+      urlCondition = regex("url", ".*" + urlPattern + ".*", "i");
+    }
+    if (descriptionCondition != null && urlCondition != null) {
+      return and(descriptionCondition, urlCondition);
+    }
+    return descriptionCondition != null ? descriptionCondition : urlCondition;
   }
 }

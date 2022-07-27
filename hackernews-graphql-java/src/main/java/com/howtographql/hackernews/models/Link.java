@@ -7,15 +7,15 @@ public class Link {
     private final String id; //Add the ID to connect us to the database
 
 
-    public Link(String url, String description, String id) {
-        this.url = url;
-        this.description = description;
+    public Link(String id, String description, String url) {
         this.id = id;
+        this.description = description;
+        this.url = url;
     }
 
 
-    public Link(String url, String description) {
-        this(null, url, description);
+    public Link(String description, String url) {
+        this(null, description, url);
     }
     
     public String getId() {

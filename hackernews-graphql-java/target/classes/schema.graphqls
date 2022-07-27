@@ -1,7 +1,7 @@
 type Link {
     id:ID!
-  url: String!
-  description: String!
+    url: String!
+    description: String!
 }
 
 type User{
@@ -16,6 +16,16 @@ type SignInPayload{
   user: User
 }
 
+type Vote {
+    id: ID!
+    createdAt: DateTime!
+    user: User!
+    link: Link!
+}
+
+# Using scalar to define a type of data specific
+scalar DateTime
+
 input Data{
     email: String!
     password: String!
@@ -23,17 +33,28 @@ input Data{
 
 # Login an authentication
 
+# Filtering
+input LinkFilter{
+  description_contain:String
+  url_contain:String
+}
+
+
 # ----------------------------------------------------------------
 
 type Query {
   allLinks: [Link]
   allUsers: [User]
+  allLinksFilter(filter:LinkFilter):[Link]
+# Filtering with pagination
+  allLinksFilterPagination(filter:LinkFilter, skip: Int=0, first:Int=0):[Link]
 }
 
 type Mutation{
     createLink(url:String!, description:String!):Link
     signInUser(auth: Data): SignInPayload
     createUser(name:String!, authProvider: Data):User
+    createVote(linkId:ID, userId:ID):Vote
 }
 
 schema {
