@@ -2,12 +2,15 @@ D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howto
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\resolvers\VoteResolver.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\db\MongoDBConnector.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\models\Vote.java
+D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\interfaces\UserInterface.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\services\Query.java
+D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\interfaces\LinkInterface.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\resolvers\SingInResolver.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\repositories\LinkRepository.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\repositories\UserRepository.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\models\AuthData.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\models\Link.java
+D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\interfaces\VoteInterface.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\controllers\GraphQLEndpoint.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\repositories\VoteRepository.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\error\SanitizedError.java

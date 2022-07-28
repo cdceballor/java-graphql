@@ -4,13 +4,14 @@ import static com.mongodb.client.model.Filters.eq;
 
 import java.util.List;
 
+import com.howtographql.hackernews.interfaces.UserInterface;
 import com.howtographql.hackernews.models.User;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import java.util.ArrayList;
 
-public class UserRepository {
+public class UserRepository implements UserInterface {
 
   private final MongoCollection<Document> users;
 
@@ -18,16 +19,19 @@ public class UserRepository {
     this.users = users;
   }
 
+  @Override
   public User findByEmail(String email) {
     Document doc = users.find(eq("email", email)).first();
     return user(doc);
   }
 
+  @Override
   public User findById(String id) {
     Document doc = users.find(eq("_id", new ObjectId(id))).first();
     return user(doc);
   }
 
+  @Override
   public User saveUser(User user) {
     Document doc = new Document();
     doc.append("name", user.getName());
@@ -41,6 +45,7 @@ public class UserRepository {
         user.getPassword());
   }
 
+  @Override
   public List<User> getAllUsers() {
     List<User> allUsers = new ArrayList<>();
     for (Document doc : users.find()) {

@@ -2,6 +2,7 @@ package com.howtographql.hackernews.repositories;
 
 import static com.mongodb.client.model.Filters.eq;
 
+import com.howtographql.hackernews.interfaces.LinkInterface;
 import com.howtographql.hackernews.models.Link;
 import com.howtographql.hackernews.models.LinkFilter;
 import com.mongodb.client.FindIterable;
@@ -16,7 +17,7 @@ import org.bson.types.ObjectId;
 import static com.mongodb.client.model.Filters.regex;
 import static com.mongodb.client.model.Filters.and;
 
-public class LinkRepository {
+public class LinkRepository implements LinkInterface {
 
   private final MongoCollection<Document> links;
 
@@ -25,15 +26,18 @@ public class LinkRepository {
   public LinkRepository(MongoCollection<Document> links) {
     // links = new ArrayList<>(); //Creating the structure to save data
     // add some links to start off with|
-    // links.add(new Link("http://howtographql.com", "Your favorite GraphQL page")); //Data example
+    // links.add(new Link("http://howtographql.com", "Your favorite GraphQL page"));
+    // //Data example
     this.links = links;
   }
 
+  @Override
   public Link findById(String id) {
     Document doc = links.find(eq("id", new ObjectId(id))).first();
     return link(doc);
   }
 
+  @Override
   public List<Link> getAllLinks() {
     List<Link> allLinks = new ArrayList<>();
     for (Document doc : links.find()) {
@@ -42,6 +46,7 @@ public class LinkRepository {
     return allLinks;
   }
 
+  @Override
   public void saveLink(Link link) {
     Document doc = new Document();
     doc.append("url", link.getUrl());
@@ -57,6 +62,7 @@ public class LinkRepository {
   }
 
   // Creating the filter implementation to the different links
+  @Override
   public List<Link> getAllLinksFilter(LinkFilter filter) {
     Optional<Bson> mongoFilter = Optional.ofNullable(filter).map(this::buildFilter);
 
@@ -67,6 +73,7 @@ public class LinkRepository {
     return allLinks;
   }
 
+  @Override
   public List<Link> getAllLinksFilterPagination(LinkFilter filter, int skip, int limit) {
     Optional<Bson> mongoFilter = Optional.ofNullable(filter).map(this::buildFilter);
 

@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.bson.Document;
 import com.mongodb.client.MongoCollection;
-
+import com.howtographql.hackernews.interfaces.VoteInterface;
 import com.howtographql.hackernews.models.Vote;
 import com.howtographql.hackernews.scalar.Scalars;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class VoteRepository {
+public class VoteRepository implements VoteInterface {
 
     private final MongoCollection<Document> votes;
 
@@ -20,6 +20,7 @@ public class VoteRepository {
         this.votes = votes;
     }
 
+    @Override
     public List<Vote> findByUserId(String userId) {
         List<Vote> list = new ArrayList<>();
         for (Document doc : votes.find(eq("userId", userId))) {
@@ -28,6 +29,7 @@ public class VoteRepository {
         return list;
     }
 
+    @Override
     public List<Vote> findByLinkId(String linkId) {
         List<Vote> list = new ArrayList<>();
         for (Document doc : votes.find(eq("linkId", linkId))) {
@@ -36,6 +38,7 @@ public class VoteRepository {
         return list;
     }
 
+    @Override
     public Vote saveVote(Vote vote) {
         Document doc = new Document();
         doc.append("userId", vote.getUserId());
