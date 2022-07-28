@@ -1,6 +1,7 @@
 package com.howtographql.hackernews.controllers;
 
 import com.coxautodev.graphql.tools.SchemaParser;
+// import com.howtographql.hackernews.db.MongoDBConnector;
 import com.howtographql.hackernews.error.SanitizedError;
 import com.howtographql.hackernews.repositories.LinkRepository;
 import com.howtographql.hackernews.repositories.UserRepository;
@@ -29,7 +30,7 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
   private static LinkRepository linkRepository;
   private static UserRepository userRepository;
   private static VoteRepository voteRepository;
-
+  
   static {
     // Change to `new MongoClient("<host>:<port>")`
     // if you don't have Mongo running locally on port 27017
@@ -37,6 +38,8 @@ public class GraphQLEndpoint extends SimpleGraphQLServlet {
     linkRepository = new LinkRepository(mongo.getCollection("links"));
     userRepository = new UserRepository(mongo.getCollection("users"));
     voteRepository = new VoteRepository(mongo.getCollection("votes"));
+    // MongoDBConnector mongodb = new MongoDBConnector();
+    // mongodb.connect(mongo, linkRepository, userRepository, voteRepository);
   }
 
   public GraphQLEndpoint() {

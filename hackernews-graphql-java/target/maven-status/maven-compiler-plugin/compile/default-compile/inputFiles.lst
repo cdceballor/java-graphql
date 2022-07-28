@@ -1,5 +1,6 @@
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\scalar\Scalars.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\resolvers\VoteResolver.java
+D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\db\MongoDBConnector.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\models\Vote.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\services\Query.java
 D:\PROJECTS\graphql\java-graphql\hackernews-graphql-java\src\main\java\com\howtographql\hackernews\resolvers\SingInResolver.java
