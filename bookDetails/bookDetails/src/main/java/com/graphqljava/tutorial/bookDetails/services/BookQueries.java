@@ -3,8 +3,9 @@ package com.graphqljava.tutorial.bookDetails.services;
 import com.graphqljava.tutorial.bookDetails.data.BookList;
 import com.graphqljava.tutorial.bookDetails.interfaces.BookQueriesI;
 import com.graphqljava.tutorial.bookDetails.models.Book;
-import java.util.List;
+import com.graphqljava.tutorial.bookDetails.models.BookFilter;
 
+import java.util.List;
 public class BookQueries implements BookQueriesI {
 
   @Override

@@ -3,11 +3,18 @@ type Query {
     authorById(id:ID): Author
     getAuthors:[Author]
     getBooks:[Book]
+    getBooksFiltered(filter:InputBookFilter):[Book]
 }
 
 
 type Mutation{
     addBook(book: InputBook):Book
+    saveAuthor(author: InputAuthor):Author
+}
+
+input InputBookFilter{
+    name_contains:String
+    pageCount_contains:Int
 }
 
 input InputBook{
@@ -15,7 +22,12 @@ input InputBook{
     name: String!
     pageCount: Int!
     authorId:ID!
+}
 
+input InputAuthor{
+    id:ID!
+    firstName: String!
+    secondName: String!
 }
 
 type Book {

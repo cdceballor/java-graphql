@@ -11,7 +11,6 @@ public class MongoDBConnector {
     public void connect(
             MongoDatabase mongo, LinkRepository linkRepository, UserRepository userRepository,VoteRepository voteRepository) {
 
-        // MongoDatabase mongo = new MongoClient().getDatabase("harckernews");
         linkRepository = new LinkRepository(mongo.getCollection("links"));
         userRepository = new UserRepository(mongo.getCollection("users"));
         voteRepository = new VoteRepository(mongo.getCollection("votes"));

@@ -3,6 +3,7 @@ package com.graphqljava.tutorial.bookDetails.controllers;
 import java.util.List;
 
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -22,5 +23,10 @@ public class AuthorController {
     @QueryMapping
     public List<Author> getAuthors() {
         return authorQueries.getAuthors();
+    }
+
+    @MutationMapping
+    public Author saveAuthor(@Argument Author author) {
+        return authorQueries.saveAuthor(author);
     }
 }

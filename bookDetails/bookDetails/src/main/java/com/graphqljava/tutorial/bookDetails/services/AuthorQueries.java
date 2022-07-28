@@ -16,4 +16,9 @@ public class AuthorQueries implements AuthorQueriesI {
     public List<Author> getAuthors() {
         return AuthorList.authors;
     }
+    @Override
+    public Author saveAuthor(Author author) {
+        AuthorList.authors.add(author);
+        return author;
+    }
 }

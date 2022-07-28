@@ -2,6 +2,7 @@ package com.graphqljava.tutorial.bookDetails.controllers;
 
 import com.graphqljava.tutorial.bookDetails.models.Author;
 import com.graphqljava.tutorial.bookDetails.models.Book;
+import com.graphqljava.tutorial.bookDetails.models.BookFilter;
 import com.graphqljava.tutorial.bookDetails.services.AuthorQueries;
 import com.graphqljava.tutorial.bookDetails.services.BookQueries;
 import java.util.List;
